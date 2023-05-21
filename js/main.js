@@ -9,7 +9,7 @@ const AUTHORS_COUNT = {
   MAX: 10,
 };
 
-const cards = [];
+let cards = [];
 
 const TITLE_CARD = [
   'Просторное жилье с прекрасным видом на горы',
@@ -91,6 +91,18 @@ const photosCount = {
   MAX: 3,
 };
 
+const locationXRange = {
+  MIN: 35.65000,
+  MAX: 35.70000,
+  decimalPlaces: 5,
+};
+
+const locationYRange = {
+  MIN: 139.70000,
+  MAX: 139.80000,
+  decimalPlaces: 5,
+};
+
 // Строка адрес с ведущим нулем
 const addAuthor = (index) => {
   const leadingZero = index < 10 ? '0' : '';
@@ -150,15 +162,19 @@ const addOffer = () => {
   }
 };
 
+const addLocation  = {
+  x: generateRandomFloat(locationXRange.MIN, locationXRange.MAX, locationXRange.decimalPlaces),
+  y: generateRandomFloat(locationYRange.MIN, locationYRange.MAX, locationYRange.decimalPlaces),
+};
+
 const addCards = () => {
   for (let i = 0; i < CARDS_COUNT; i++) {
     cards.push({
       author: addAuthor(getRandomInt(AUTHORS_COUNT.MIN, AUTHORS_COUNT.MAX)),
       offer: addOffer(),
+      location: addLocation,
     })
   }
 };
 
 addCards()
-
-console.log(cards);

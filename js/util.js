@@ -1,3 +1,5 @@
+/* global _:readonly */
+
 //Случайное число
 
 const getRandomInt = (min, max) => {
@@ -18,18 +20,17 @@ getRandomInt(1, 10);
 // Генерация врменных координат
 
 const generateRandomFloat = (from, to, decimalPlaces) => {
-  if (from >= to) {
-    throw new Error('from value must be smaller than to value');
+  if (to <= from) {
+    throw new Error('Invalid range');
   }
 
-  let randomNum = Math.random() * (to - from) + from;
-  let powerOfTen = Math.pow(10, decimalPlaces);
-  let roundedNum = Math.round(randomNum * powerOfTen) / powerOfTen;
+  const randomFloat = _.random(from, to, true);
+  const multiplier = Math.pow(10, decimalPlaces);
 
-  return roundedNum;
+  return Math.round(randomFloat * multiplier) / multiplier;
 };
 
-generateRandomFloat(1.1, 1.2, 2);
+generateRandomFloat(1.1, 1.2, 10);
 
 // Случайный элемент массива
 const getRandomElementArr = (array) => {
