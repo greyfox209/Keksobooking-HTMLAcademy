@@ -1,3 +1,3 @@
 import { createCards } from './popup.js';
 
-console.log(createCards);
+console.log(createCards());

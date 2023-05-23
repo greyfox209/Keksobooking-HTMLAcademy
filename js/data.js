@@ -2,7 +2,7 @@
 
 import { getRandomInt, generateRandomFloat, getRandomElementArr } from './util.js';
 
-const CARDS_COUNT = 10;
+const CARDS_COUNT = 1;
 
 const AUTHORS_COUNT = {
   MIN: 1,
@@ -162,10 +162,11 @@ const addOffer = () => {
   }
 };
 
-const addLocation  = {
+const addLocation = {
   x: generateRandomFloat(locationXRange.MIN, locationXRange.MAX, locationXRange.decimalPlaces),
   y: generateRandomFloat(locationYRange.MIN, locationYRange.MAX, locationYRange.decimalPlaces),
 };
+
 
 const addCards = () => {
   for (let i = 0; i < CARDS_COUNT; i++) {
@@ -177,6 +178,20 @@ const addCards = () => {
   }
 };
 
-addCards()
+addCards();
+
+
+/*
+const addCard = () => {
+  return {
+    author: addAuthor(getRandomInt(AUTHORS_COUNT.MIN, AUTHORS_COUNT.MAX)),
+    offer: addOffer(),
+    location: addLocation,
+  }
+};
+
+
+const addCards = () => new Array(CARDS_COUNT).fill(null).map(() => addCard());
+*/
 
 export { cards };

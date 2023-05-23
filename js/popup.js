@@ -27,7 +27,7 @@ const createCards = () => {
 export { createCards };
 */
 
-const cardsElementsList = cards();
+const cardsElementsList = cards;
 
 const createCards = () => {
   const cardsListFragment = document.createDocumentFragment();
@@ -36,7 +36,7 @@ const createCards = () => {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.popup__title').textContent = offer.title;
     cardElement.querySelector('.popup__text--address').textContent = offer.address;
-    cardElement.querySelector('.popup__text--price').textContent = offer.price + '₽/ночь';
+    cardElement.querySelector('.popup__text--price').textContent = offer.price + ' ₽/ночь';
     cardsListFragment.appendChild(cardElement);
   });
 
