@@ -1,3 +1,3 @@
-import { cards } from './data.js';
+import { createCards } from './popup.js';
 
-console.log(cards);
+console.log(createCards);
