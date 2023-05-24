@@ -34,7 +34,6 @@ const TYPE_CARD = [
   'flat',
   'house',
   'bungalow',
-  'Идеальное место для семейного отдыха',
 ];
 
 const ROOMS_CARD = {
@@ -124,7 +123,7 @@ const addFeatures = () => {
   const uniqueFeatures = _.sampleSize(FEATURES_CARD, featuresCountAll);
 
   uniqueFeatures.forEach(feature => {
-    features.push({ features: feature });
+    features.push(feature);
   });
 
   return features;
@@ -138,7 +137,7 @@ const addPhotos = () => {
   const uniquePhotos = _.sampleSize(PHOTOS_CARD, photosCountAll);
 
   uniquePhotos.forEach(photo => {
-    photos.push({ photos: photo });
+    photos.push(photo);
   });
 
   return photos;
