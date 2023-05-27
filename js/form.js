@@ -1,9 +1,9 @@
 /* global _:readonly */
 
+// Функция для обработки изменений в поле "Тип жилья"
+
 const typeSelect = document.querySelector('#type');
 const priceInput = document.querySelector('#price');
-
-// Функция для обработки изменений в поле "Тип жилья"
 
 const handleTypeChange = () => {
   const selectedOption = typeSelect.value;
@@ -55,4 +55,38 @@ const synchronizeTimeFields = (timeInSelectId, timeOutSelectId) => {
 
 synchronizeTimeFields('timein', 'timeout');
 
-export { handleTypeChange, synchronizeTimeFields };
+// Неактивное состояние форм
+
+const adForm = document.querySelector('.ad-form');
+const formElements = adForm.querySelectorAll('input, select, textarea, button');
+
+const mapFiltersForm = document.querySelector('.map__filters');
+const mapFiltersElements = mapFiltersForm.querySelectorAll('input, select, textarea, button');
+
+const activateForm = () => {
+  adForm.classList.remove('ad-form--disabled');
+  formElements.forEach((element) => {
+    element.removeAttribute('disabled');
+  });
+
+  mapFiltersForm.classList.remove('map__filters--disabled');
+  mapFiltersElements.forEach((element) => {
+    element.removeAttribute('disabled');
+  });
+};
+
+const disableForm = () => {
+  adForm.classList.add('ad-form--disabled');
+  formElements.forEach((element) => {
+    element.disabled = true;
+  });
+
+  mapFiltersForm.classList.add('map__filters--disabled');
+  mapFiltersElements.forEach((element) => {
+    element.disabled = true;
+  });
+};
+
+disableForm();
+
+export { activateForm, disableForm, handleTypeChange, synchronizeTimeFields };
