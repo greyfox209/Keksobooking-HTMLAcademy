@@ -2,7 +2,7 @@
 
 import { getRandomInt, generateRandomFloat, getRandomElementArr } from './util.js';
 
-const CARDS_COUNT = 1;
+const CARDS_COUNT = 10;
 
 const AUTHORS_COUNT = {
   MIN: 1,
@@ -22,6 +22,49 @@ const TITLE_CARD = [
   'Комфортабельный дом с собственной парковкой',
   'Прекрасный коттедж в окружении природы',
   'Стильная квартира с современным дизайном и отличным расположением',
+];
+
+const ADDRESS_CARD = [
+  {
+    lat: 35.70253,
+    lng: 139.68883,
+  },
+  {
+    lat: 35.70944,
+    lng: 139.71492,
+  },
+  {
+    lat: 35.73018,
+    lng: 139.72261,
+  },
+  {
+    lat: 35.71502,
+    lng: 139.64763,
+  },
+  {
+    lat: 35.68268,
+    lng: 139.63445,
+  },
+  {
+    lat: 35.64251,
+    lng: 139.68361,
+  },
+  {
+    lat: 35.64854,
+    lng: 139.73607,
+  },
+  {
+    lat: 35.66639,
+    lng: 139.78276,
+  },
+  {
+    lat: 35.69361,
+    lng: 139.81380,
+  },
+  {
+    lat: 35.71435,
+    lng: 139.83000,
+  },
 ];
 
 const PRICE_CARD = {
@@ -147,7 +190,7 @@ const addOffer = () => {
   for (let i = 0; i < CARDS_COUNT; i++) {
     return {
       title: getRandomElementArr(TITLE_CARD),
-      address: 'location.x ' + ' location.y',
+      address: getRandomElementArr(ADDRESS_CARD),
       price: getRandomInt(PRICE_CARD.MIN, PRICE_CARD.MAX),
       type: getRandomElementArr(TYPE_CARD),
       rooms: getRandomInt(ROOMS_CARD.MIN, ROOMS_CARD.MAX),
@@ -193,4 +236,4 @@ const addCard = () => {
 const addCards = () => new Array(CARDS_COUNT).fill(null).map(() => addCard());
 */
 
-export { cards };
+export { cards, ADDRESS_CARD };
