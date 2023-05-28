@@ -1,6 +1,6 @@
 /* global _:readonly */
 
-import { getRandomInt, generateRandomFloat, getRandomElementArr } from './util.js';
+import { getRandomInt, getRandomElementArr } from './util.js';
 
 const CARDS_COUNT = 10;
 
@@ -133,18 +133,6 @@ const photosCount = {
   MAX: 3,
 };
 
-const locationXRange = {
-  MIN: 35.65000,
-  MAX: 35.70000,
-  decimalPlaces: 5,
-};
-
-const locationYRange = {
-  MIN: 139.70000,
-  MAX: 139.80000,
-  decimalPlaces: 5,
-};
-
 // Строка адрес с ведущим нулем
 const addAuthor = (index) => {
   const leadingZero = index < 10 ? '0' : '';
@@ -204,36 +192,16 @@ const addOffer = () => {
   }
 };
 
-const addLocation = {
-  x: generateRandomFloat(locationXRange.MIN, locationXRange.MAX, locationXRange.decimalPlaces),
-  y: generateRandomFloat(locationYRange.MIN, locationYRange.MAX, locationYRange.decimalPlaces),
-};
-
-
 const addCards = () => {
   for (let i = 0; i < CARDS_COUNT; i++) {
     cards.push({
       author: addAuthor(getRandomInt(AUTHORS_COUNT.MIN, AUTHORS_COUNT.MAX)),
       offer: addOffer(),
-      location: addLocation,
+      location: getRandomElementArr(ADDRESS_CARD),
     })
   }
 };
 
 addCards();
 
-
-/*
-const addCard = () => {
-  return {
-    author: addAuthor(getRandomInt(AUTHORS_COUNT.MIN, AUTHORS_COUNT.MAX)),
-    offer: addOffer(),
-    location: addLocation,
-  }
-};
-
-
-const addCards = () => new Array(CARDS_COUNT).fill(null).map(() => addCard());
-*/
-
-export { cards, ADDRESS_CARD };
+export { cards };

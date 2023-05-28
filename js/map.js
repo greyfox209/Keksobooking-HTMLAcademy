@@ -1,8 +1,8 @@
 /* global L:readonly */
 
 import { activateForm, disableForm } from './form.js';
-import { ADDRESS_CARD } from './data.js';
-import { createCardElement } from './popup.js';
+import { cards } from './data.js';
+import { createCard } from './popup.js';
 
 const initializeMap = () => {
   try {
@@ -45,37 +45,8 @@ const initializeMap = () => {
       addressInput.value = formattedLatLng;
     });
 
-    /*
-    ADDRESS_CARD.forEach(({ lat, lng }) => {
-      const icon = L.icon({
-        iconUrl: 'img/pin.svg',
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-      });
-
-      const marker = L.marker(
-        {
-          lat,
-          lng,
-        },
-        {
-          icon,
-        },
-      );
-
-      marker
-        .addTo(map)
-        .bindPopup(
-          createCardElement(point),
-          {
-            keepInView: true,
-          },
-        );
-    });
-    */
-
-    ADDRESS_CARD.forEach((point) => {
-      const {lat, lng} = point;
+    cards.forEach((point) => {
+      const {lat, lng} = point.location;
 
       const icon = L.icon({
         iconUrl: 'img/pin.svg',
@@ -96,7 +67,7 @@ const initializeMap = () => {
       marker
         .addTo(map)
         .bindPopup(
-          createCardElement(point),
+          createCard(point),
           {
             keepInView: true,
           },
