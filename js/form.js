@@ -1,5 +1,26 @@
 /* global _:readonly */
 
+// Заголовок обяъвления
+
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+
+const userTitleInput = document.querySelector('#title');
+
+userTitleInput.addEventListener('input', () => {
+  const valueLength = userTitleInput.value.length;
+
+  if (valueLength < MIN_TITLE_LENGTH) {
+    userTitleInput.setCustomValidity('Введите ещё ' + (MIN_TITLE_LENGTH - valueLength) +' симв.');
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    userTitleInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) +' симв.');
+  } else {
+    userTitleInput.setCustomValidity('');
+  }
+
+  userTitleInput.reportValidity();
+});
+
 // Функция для обработки изменений в поле "Тип жилья"
 
 const typeSelect = document.querySelector('#type');
@@ -31,6 +52,22 @@ const handleTypeChange = () => {
 }
 
 typeSelect.addEventListener('change', handleTypeChange);
+
+const MAX_PRICE_VALUE = 1000000;
+
+const userPriceInput = document.querySelector('#price');
+
+userPriceInput.addEventListener('input', () => {
+  const priceValue = parseInt(userPriceInput.value);
+
+  if (priceValue > MAX_PRICE_VALUE) {
+    userPriceInput.setCustomValidity('Максимальная цена ' + MAX_PRICE_VALUE);
+  } else {
+    userPriceInput.setCustomValidity('');
+  }
+
+  userPriceInput.reportValidity();
+});
 
 // Функция для обработки изменений в полях "Время заезда и выезда"
 
