@@ -92,6 +92,54 @@ const synchronizeTimeFields = (timeInSelectId, timeOutSelectId) => {
 
 synchronizeTimeFields('timein', 'timeout');
 
+// Функция для установки ограничений выбора количества гостей
+
+const synchronizeRoomsAndGuests = () => {
+  const roomNumberSelect = document.getElementById('room_number');
+  const capacitySelect = document.getElementById('capacity');
+
+  function setCapacityOptions(selectedRoomNumber) {
+    // Очищаем предыдущие ограничения выбора количества гостей
+    capacitySelect.querySelectorAll('option').forEach((option) => {
+      option.disabled = false;
+    });
+
+    // Устанавливаем ограничения выбора количества гостей
+    if (selectedRoomNumber === 1) {
+      capacitySelect.value = '1';
+      disableOptions(capacitySelect, ['2', '3', '0']);
+    } else if (selectedRoomNumber === 2) {
+      disableOptions(capacitySelect, ['3', '0']);
+    } else if (selectedRoomNumber === 3) {
+      disableOptions(capacitySelect, ['0']);
+    } else if (selectedRoomNumber === 100) {
+      capacitySelect.value = '0';
+      disableOptions(capacitySelect, ['1', '2', '3']);
+    }
+  }
+
+  // Функция для отключения опций выбора количества гостей
+  function disableOptions(selectElement, values) {
+    selectElement.querySelectorAll('option').forEach((option) => {
+      if (values.includes(option.value)) {
+        option.disabled = true;
+      }
+    });
+  }
+
+  // Срабатывает при изменении выбора комнат
+  roomNumberSelect.addEventListener('change', () => {
+    const selectedRoomNumber = parseInt(roomNumberSelect.value);
+    setCapacityOptions(selectedRoomNumber);
+  });
+
+  // Инициализация ограничений выбора количества гостей при загрузке страницы
+  const initialRoomNumber = parseInt(roomNumberSelect.value);
+  setCapacityOptions(initialRoomNumber);
+};
+
+synchronizeRoomsAndGuests();
+
 // Неактивное состояние форм
 
 const adForm = document.querySelector('.ad-form');

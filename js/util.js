@@ -37,4 +37,14 @@ const getRandomElementArr = (array) => {
   return array[getRandomInt(0, array.length - 1)];
 };
 
-export { getRandomInt, generateRandomFloat, getRandomElementArr };
+// ESCAPE
+const Keys = {
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
+};
+
+const checkEsc = (evt) => {
+  return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
+};
+
+export { getRandomInt, generateRandomFloat, getRandomElementArr, checkEsc };
