@@ -1,10 +1,9 @@
 /* global L:readonly */
 
 import { activateForm, disableForm } from './form.js';
-import { cards } from './data.js';
 import { createCard } from './popup.js';
 
-const initializeMap = () => {
+const initializeMap = (data) => {
   try {
     const map = L.map('map-canvas').setView({ lat: 35.68950, lng: 139.69171 }, 12);
 
@@ -45,7 +44,7 @@ const initializeMap = () => {
       addressInput.value = formattedLatLng;
     });
 
-    cards.forEach((point) => {
+    data.forEach((point) => {
       const {lat, lng} = point.location;
 
       const icon = L.icon({
@@ -79,7 +78,6 @@ const initializeMap = () => {
     disableForm();
   }
 };
-
 
 const formatCoordinates = (lat, lng) => {
   const roundedLat = lat.toFixed(5);

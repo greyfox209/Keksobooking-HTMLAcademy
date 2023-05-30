@@ -49,7 +49,7 @@ const handleTypeChange = () => {
     default:
       break;
   }
-}
+};
 
 typeSelect.addEventListener('change', handleTypeChange);
 
@@ -68,6 +68,8 @@ userPriceInput.addEventListener('input', () => {
 
   userPriceInput.reportValidity();
 });
+
+handleTypeChange();
 
 // Функция для обработки изменений в полях "Время заезда и выезда"
 
