@@ -1,6 +1,5 @@
 import { checkEsc } from './util.js';
-/*
-const main = document.querySelector('main');
+
 const errorTemplate = document.querySelector('#error').content;
 const errorFragment = document.createDocumentFragment();
 const successTemplate = document.querySelector('#success').content;
@@ -26,13 +25,13 @@ const removeAllert = (type) => {
   document.querySelector(type).remove();
 };
 
-const showError = (text, button) => {
+const showError = (text) => {
   const errorElement = errorTemplate.cloneNode(true);
 
   errorElement.querySelector('.error__message').textContent = text;
-  errorElement.querySelector('.error__button').textContent = button;
 
   const errorButton = errorElement.querySelector('.error__button');
+  errorButton.textContent = 'Попробовать снова';
 
   errorElement.querySelector('.error').addEventListener('click', (evt) => {
     let element = evt.target.classList;
@@ -49,7 +48,7 @@ const showError = (text, button) => {
   document.addEventListener('keydown', onErrorEscKeydown);
 
   errorFragment.appendChild(errorElement);
-  main.appendChild(errorFragment);
+  document.body.appendChild(errorFragment);
 };
 
 const showSuccess = (text) => {
@@ -68,14 +67,13 @@ const showSuccess = (text) => {
   document.addEventListener('keydown', onSuccessEscKeydown);
 
   successFragment.appendChild(successElement);
-  main.appendChild(successFragment);
+  document.body.appendChild(successFragment);
 };
 
 export { showError, showSuccess };
-*/
 
-// const main = document.querySelector('main');
 
+/*
 const errorTemplate = document.querySelector('#error').content;
 const errorFragment = document.createDocumentFragment();
 const successTemplate = document.querySelector('#success').content;
@@ -147,3 +145,4 @@ const showSuccess = (text) => {
 };
 
 export { showError, showSuccess };
+*/

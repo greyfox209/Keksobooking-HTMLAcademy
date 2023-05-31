@@ -1,5 +1,8 @@
 /* global _:readonly */
 
+import { showError, showSuccess } from './alerts.js';
+import { sendData } from './fetch.js';
+
 // Заголовок обяъвления
 
 const MIN_TITLE_LENGTH = 30;
@@ -176,4 +179,20 @@ const disableForm = () => {
 
 disableForm();
 
-export { activateForm, disableForm, handleTypeChange, synchronizeTimeFields };
+// Отправка формы
+
+const form = document.querySelector('.ad-form');
+
+const setFormSubmit = () => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => showSuccess('Ваше объявление успешно размещено!'),
+      () => showError('Ошибка размещения\nобъявления'),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export { setFormSubmit, activateForm, disableForm, handleTypeChange, synchronizeTimeFields };
