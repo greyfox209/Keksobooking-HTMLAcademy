@@ -3,6 +3,10 @@
 import { activateForm, disableForm } from './form.js';
 import { createCard } from './popup.js';
 
+let mainPinMarker; // переменная для хранения состояния метки
+
+const addressInput = document.querySelector('#address');
+
 const initializeMap = (data) => {
   try {
     const map = L.map('map-canvas').setView({ lat: 35.68950, lng: 139.69171 }, 12);
@@ -20,7 +24,7 @@ const initializeMap = (data) => {
       iconAnchor: [26, 52],
     });
 
-    const mainPinMarker = L.marker(
+    mainPinMarker = L.marker(
       {
         lat: 35.68950,
         lng: 139.69171,
@@ -33,7 +37,7 @@ const initializeMap = (data) => {
 
     mainPinMarker.addTo(map);
 
-    const addressInput = document.querySelector('#address');
+
     const initialLatLng = mainPinMarker.getLatLng();
     const formattedInitialLatLng = formatCoordinates(initialLatLng.lat, initialLatLng.lng);
     addressInput.value = formattedInitialLatLng;
@@ -45,7 +49,7 @@ const initializeMap = (data) => {
     });
 
     data.forEach((point) => {
-      const {lat, lng} = point.location;
+      const { lat, lng } = point.location;
 
       const icon = L.icon({
         iconUrl: 'img/pin.svg',
@@ -79,10 +83,17 @@ const initializeMap = (data) => {
   }
 };
 
+const resetMainPinMarker = () => {
+  if (mainPinMarker) {
+    const initialLatLng = { lat: 35.68950, lng: 139.69171 };
+    mainPinMarker.setLatLng(initialLatLng);
+  }
+};
+
 const formatCoordinates = (lat, lng) => {
   const roundedLat = lat.toFixed(5);
   const roundedLng = lng.toFixed(5);
   return `${roundedLat}, ${roundedLng}`;
 };
 
-export { initializeMap };
+export { initializeMap, resetMainPinMarker };

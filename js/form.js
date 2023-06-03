@@ -2,6 +2,7 @@
 
 import { showError, showSuccess } from './alerts.js';
 import { sendData } from './fetch.js';
+import { resetMainPinMarker } from './map.js';
 
 // Заголовок обяъвления
 
@@ -14,9 +15,9 @@ userTitleInput.addEventListener('input', () => {
   const valueLength = userTitleInput.value.length;
 
   if (valueLength < MIN_TITLE_LENGTH) {
-    userTitleInput.setCustomValidity('Введите ещё ' + (MIN_TITLE_LENGTH - valueLength) +' симв.');
+    userTitleInput.setCustomValidity('Введите ещё ' + (MIN_TITLE_LENGTH - valueLength) + ' симв.');
   } else if (valueLength > MAX_TITLE_LENGTH) {
-    userTitleInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) +' симв.');
+    userTitleInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) + ' симв.');
   } else {
     userTitleInput.setCustomValidity('');
   }
@@ -188,11 +189,26 @@ const setFormSubmit = () => {
     evt.preventDefault();
 
     sendData(
-      () => showSuccess(),
+      () => {
+        showSuccess();
+        resetMainPinMarker();
+      },
       () => showError(),
       new FormData(evt.target),
     );
+
+    form.reset();
   });
 };
+
+// Сброс формы
+
+const resetButton = document.querySelector('.ad-form__reset');
+
+resetButton.addEventListener('click', () => {
+  adForm.reset();
+
+  resetMainPinMarker();
+});
 
 export { setFormSubmit, activateForm, disableForm, handleTypeChange, synchronizeTimeFields };
