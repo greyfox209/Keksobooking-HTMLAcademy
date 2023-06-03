@@ -188,8 +188,8 @@ const setFormSubmit = () => {
     evt.preventDefault();
 
     sendData(
-      () => showSuccess('Ваше объявление успешно размещено!'),
-      () => showError('Ошибка размещения\nобъявления'),
+      () => showSuccess(),
+      () => showError(),
       new FormData(evt.target),
     );
   });

@@ -379,6 +379,10 @@ fieldset {
   border-radius: 4px;
 }
 
+.ad-form__element textarea {
+  resize: none;
+}
+
 .ad-form__element input:hover,
 .ad-form__element select:hover,
 .ad-form__element textarea:hover {
