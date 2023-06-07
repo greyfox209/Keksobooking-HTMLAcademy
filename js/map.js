@@ -2,7 +2,7 @@
 
 import { activateForm, disableForm } from './form.js';
 import { createCard } from './popup.js';
-import { filterMarkersByType } from './filter.js';
+import { filterMarkersByType, filterMarkersByPrice, filterMarkersByRooms, filterMarkersByGuests, filterMarkersByFeatures } from './filter.js';
 
 let mainPinMarker;
 let data; // Переменная для хранения данных о маркерах
@@ -49,26 +49,40 @@ const initializeMap = (markers) => {
     });
 
     const housingTypeSelect = document.querySelector('#housing-type');
+    const housingPriceSelect = document.querySelector('#housing-price');
+    const housingRoomsSelect = document.querySelector('#housing-rooms');
+    const housingGuestsSelect = document.querySelector('#housing-guests');
+    const housingFeaturesFieldset = document.querySelector('#housing-features');
 
-    housingTypeSelect.addEventListener('change', () => {
+    const filterMarkers = () => {
       const selectedType = housingTypeSelect.value;
-      const filteredMarkers = filterMarkersByType(data, selectedType);
+      const selectedPrice = housingPriceSelect.value;
+      const selectedRooms = housingRoomsSelect.value;
+      const selectedGuests = housingGuestsSelect.value;
+      const selectedFeatures = Array.from(housingFeaturesFieldset.querySelectorAll('input:checked'))
+        .map((input) => input.value);
+
+      let filteredMarkers = filterMarkersByType(data, selectedType);
+      filteredMarkers = filterMarkersByPrice(filteredMarkers, selectedPrice);
+      filteredMarkers = filterMarkersByRooms(filteredMarkers, selectedRooms);
+      filteredMarkers = filterMarkersByGuests(filteredMarkers, selectedGuests);
+      filteredMarkers = filterMarkersByFeatures(filteredMarkers, selectedFeatures);
+
       updateMarkers(filteredMarkers);
+    };
 
-      const bounds = L.latLngBounds(filteredMarkers.map((marker) => marker.location));
-      map.flyToBounds(bounds);
+    housingTypeSelect.addEventListener('change', filterMarkers);
+    housingPriceSelect.addEventListener('change', filterMarkers);
+    housingRoomsSelect.addEventListener('change', filterMarkers);
+    housingGuestsSelect.addEventListener('change', filterMarkers);
+    housingFeaturesFieldset.addEventListener('change', filterMarkers);
 
-      const initialLatLng = mainPinMarker.getLatLng();
-      const formattedInitialLatLng = formatCoordinates(initialLatLng.lat, initialLatLng.lng);
-      addressInput.value = formattedInitialLatLng;
-    });
-
-    const limitedData = data.slice(0, 10);
-    updateMarkers(limitedData);
+    filterMarkers(); // Вызов функции фильтрации при первичной инициализации
 
     activateForm();
   } catch (error) {
     disableForm();
+    throw new Error('Не удалось инициализировать карту');
   }
 };
 
