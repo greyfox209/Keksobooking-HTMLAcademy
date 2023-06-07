@@ -155,4 +155,3 @@ const updateMarkers = (markers) => {
 };
 
 export { initializeMap, resetMainPinMarker };
-
