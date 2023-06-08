@@ -146,6 +146,99 @@ const synchronizeRoomsAndGuests = () => {
 
 synchronizeRoomsAndGuests();
 
+// Загрузка аватара пользователя
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+const fileChooser = document.querySelector('#avatar');
+const previewContainer = document.querySelector('.ad-form-header__preview');
+const preview = previewContainer.querySelector('img');
+
+fileChooser.addEventListener('change', () => {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      preview.src = reader.result;
+
+      preview.removeAttribute('width');
+      preview.removeAttribute('height');
+
+      previewContainer.style.padding = '0px';
+      previewContainer.style.display = 'flex';
+      previewContainer.style.flexShrink = '0';
+      previewContainer.style.justifyContent = 'center';
+      previewContainer.style.alignItems = 'center';
+      previewContainer.style.overflow = 'hidden';
+
+      preview.style.maxHeight = '100%';
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
+
+// Загрузка фотографий пользователя
+
+const fileChooserImages = document.querySelector('#images');
+const previewImagesContainer = document.querySelector('.ad-form__photo');
+
+fileChooserImages.addEventListener('change', () => {
+  const file = fileChooserImages.files[0];
+  const reader = new FileReader();
+
+  const matches = ['image/png', 'image/jpeg', 'image/jpg'].some((type) => file.type === type);
+
+  if (matches) {
+    reader.addEventListener('load', () => {
+      const image = new Image();
+      image.src = reader.result;
+
+      image.addEventListener('load', () => {
+        const maxWidth = previewImagesContainer.clientWidth;
+        const maxHeight = previewImagesContainer.clientHeight;
+
+        let width = image.width;
+        let height = image.height;
+
+        if (width > maxWidth) {
+          const ratio = maxWidth / width;
+          width = maxWidth;
+          height = height * ratio;
+        }
+
+        if (height > maxHeight) {
+          const ratio = maxHeight / height;
+          height = maxHeight;
+          width = width * ratio;
+        }
+
+        previewImagesContainer.style.backgroundImage = `url(${reader.result})`;
+        previewImagesContainer.style.backgroundSize = `${width}px ${height}px`;
+        previewImagesContainer.style.backgroundRepeat = 'no-repeat';
+        previewImagesContainer.style.backgroundPosition = 'center';
+        previewImagesContainer.style.padding = '0px';
+        previewImagesContainer.style.display = 'flex';
+        previewImagesContainer.style.justifyContent = 'center';
+        previewImagesContainer.style.alignItems = 'center';
+        previewImagesContainer.style.overflow = 'hidden';
+      });
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
+
+
+
+
 // Неактивное состояние форм
 
 const adForm = document.querySelector('.ad-form');

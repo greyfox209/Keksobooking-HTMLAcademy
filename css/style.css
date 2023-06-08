@@ -421,6 +421,7 @@ fieldset {
   width: 70px;
   height: 45px;
   margin-right: 2px;
+  margin-bottom: 5px;
 
   font-size: 0;
 
@@ -662,6 +663,13 @@ fieldset {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+@media (max-width: 1200px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 .copyright {
