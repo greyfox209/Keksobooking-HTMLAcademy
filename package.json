@@ -2,7 +2,8 @@
   "name": "keksobooking",
   "version": "22.0.0",
   "private": true,
-  "description": "Личный проект «{{projectTitle}}» от HTML Academy",
+  "description": "Личный проект «Кексобукинг» от HTML Academy",
+  "homepage": "https://greyfox209.github.io/Keksobooking-HTMLAcademy/",
   "repository": {
     "type": "git",
     "url": "{{sshUrl}}"
@@ -24,7 +25,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
-    "test": "eslint js/"
+    "test": "eslint js/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "engines": {
     "node": "14.15.0"
