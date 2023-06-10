@@ -547,7 +547,7 @@ fieldset {
 }
 
 .ad-form__upload .ad-form__input {
-  width: auto;
+  width: 300px;
 }
 
 .ad-form__upload:last-of-type {

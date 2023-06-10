@@ -48,6 +48,12 @@ const initializeMap = (markers) => {
       addressInput.value = formattedLatLng;
     });
 
+    mainPinMarker.on('touchstart', function(e) {
+      if (e.originalEvent.touches.length === 1) {
+        e.originalEvent.preventDefault();
+      }
+    });
+
     const housingTypeSelect = document.querySelector('#housing-type');
     const housingPriceSelect = document.querySelector('#housing-price');
     const housingRoomsSelect = document.querySelector('#housing-rooms');
@@ -125,6 +131,12 @@ const updateMarkers = (markers) => {
     const latLng = evt.target.getLatLng();
     const formattedLatLng = formatCoordinates(latLng.lat, latLng.lng);
     addressInput.value = formattedLatLng;
+  });
+
+  mainPinMarker.on('touchstart', function(e) {
+    if (e.originalEvent.touches.length === 1) {
+      e.originalEvent.preventDefault();
+    }
   });
 
   const limitedMarkers = markers.slice(0, 10);
