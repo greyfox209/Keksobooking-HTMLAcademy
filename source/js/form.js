@@ -149,6 +149,7 @@ synchronizeRoomsAndGuests();
 // Загрузка аватара пользователя
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+const INITIAL_AVATAR_SRC = 'img/muffin-grey.svg';
 
 const fileChooser = document.querySelector('#avatar');
 const previewContainer = document.querySelector('.ad-form-header__preview');
@@ -236,9 +237,6 @@ fileChooserImages.addEventListener('change', () => {
   }
 });
 
-
-
-
 // Неактивное состояние форм
 
 const adForm = document.querySelector('.ad-form');
@@ -273,6 +271,45 @@ const disableForm = () => {
 
 disableForm();
 
+// Сброс формы
+
+const resetButton = document.querySelector('.ad-form__reset');
+
+const handleFormReset = (evt) => {
+  evt.preventDefault();
+
+  // Сбросить данные формы
+  adForm.reset();
+
+  // Очистить содержимое контейнера с аватаром
+  preview.src = INITIAL_AVATAR_SRC;
+  preview.setAttribute('width', '40');
+  preview.setAttribute('height', '44');
+  previewContainer.style.padding = '0px';
+  previewContainer.style.display = 'flex';
+  previewContainer.style.flexShrink = '0';
+  previewContainer.style.justifyContent = 'center';
+  previewContainer.style.alignItems = 'center';
+  previewContainer.style.overflow = 'hidden';
+
+  // Сбросить загруженные изображения
+  previewImagesContainer.style.backgroundImage = '';
+  previewImagesContainer.style.backgroundSize = '';
+  previewImagesContainer.style.backgroundRepeat = '';
+  previewImagesContainer.style.backgroundPosition = '';
+  previewImagesContainer.style.padding = '';
+  previewImagesContainer.style.display = '';
+  previewImagesContainer.style.justifyContent = '';
+  previewImagesContainer.style.alignItems = '';
+  previewImagesContainer.style.overflow = '';
+  previewImagesContainer.innerHTML = '';
+
+  // Сбросить основной маркер
+  resetMainPinMarker();
+};
+
+resetButton.addEventListener('click', handleFormReset);
+
 // Отправка формы
 
 const form = document.querySelector('.ad-form');
@@ -285,6 +322,29 @@ const setFormSubmit = () => {
       () => {
         showSuccess();
         resetMainPinMarker();
+
+        // Очистить содержимое контейнера с аватаром
+        preview.src = INITIAL_AVATAR_SRC;
+        preview.setAttribute('width', '40');
+        preview.setAttribute('height', '44');
+        previewContainer.style.padding = '0px';
+        previewContainer.style.display = 'flex';
+        previewContainer.style.flexShrink = '0';
+        previewContainer.style.justifyContent = 'center';
+        previewContainer.style.alignItems = 'center';
+        previewContainer.style.overflow = 'hidden';
+
+        // Сбросить загруженные изображения
+        previewImagesContainer.style.backgroundImage = '';
+        previewImagesContainer.style.backgroundSize = '';
+        previewImagesContainer.style.backgroundRepeat = '';
+        previewImagesContainer.style.backgroundPosition = '';
+        previewImagesContainer.style.padding = '';
+        previewImagesContainer.style.display = '';
+        previewImagesContainer.style.justifyContent = '';
+        previewImagesContainer.style.alignItems = '';
+        previewImagesContainer.style.overflow = '';
+        previewImagesContainer.innerHTML = '';
       },
       () => showError(),
       new FormData(evt.target),
@@ -293,15 +353,5 @@ const setFormSubmit = () => {
     form.reset();
   });
 };
-
-// Сброс формы
-
-const resetButton = document.querySelector('.ad-form__reset');
-
-resetButton.addEventListener('click', () => {
-  adForm.reset();
-
-  resetMainPinMarker();
-});
 
 export { setFormSubmit, activateForm, disableForm, handleTypeChange, synchronizeTimeFields };
