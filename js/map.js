@@ -133,12 +133,6 @@ const updateMarkers = (markers) => {
     addressInput.value = formattedLatLng;
   });
 
-  mainPinMarker.on('touchstart', function(e) {
-    if (e.originalEvent.touches.length === 1) {
-      e.originalEvent.preventDefault();
-    }
-  });
-
   const limitedMarkers = markers.slice(0, 10);
 
   limitedMarkers.forEach((point) => {
